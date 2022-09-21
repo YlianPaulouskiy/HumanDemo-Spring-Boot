@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <title>Humans</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}"/>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h1>Human Database</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <!--table-->
+            <div th:if="${humanList.isEmpty()}">
+                <h3>Database clear</h3>
+            </div>
+            <div th:if="${!humanList.isEmpty()}">
+                <table class="table table-hover">
+                    <thead>
+                    <!--                название колонок таблицы-->
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Last name</th>
+                            <th scope="col">Patronymic</th>
+                            <th scope="col">Age</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <!--                запускаем цикл, для получения всей инфы из таблицы и устанавливаем инфу по нашим колонкам-->
+                    <tr th:each="product : ${productList}">
+                        <td th: text="${product.id}">Mark</td>
+                        <td th: text="${product.name}">Mark</td>
+                        <td th: text="${product.description}">Mark</td>
+                        <td th: text="${product.price}">Mark</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}" type="application/javascript"></script>
+<script th:src="@{/webjars/popper.js/2.9.3/umd/popper.min.js}" type="application/javascript"></script>
+<script th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}" type="application/javascript"></script>
+</body>
+</html>
