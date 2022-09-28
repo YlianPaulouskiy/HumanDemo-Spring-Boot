@@ -1,6 +1,8 @@
 package edu.step.service.impl;
 
+import edu.step.dto.PhoneDto;
 import edu.step.entity.Phone;
+import edu.step.mapper.PhoneMapper;
 import edu.step.repository.PhoneRepository;
 import edu.step.service.PhoneService;
 import lombok.AllArgsConstructor;
@@ -14,22 +16,25 @@ import java.util.List;
 public class PhoneServiceImpl implements PhoneService {
 
     private final PhoneRepository phoneRepository;
+    private final PhoneMapper phoneMapper;
 
     @Override
-    public Phone findOne(Long id) {
-        return phoneRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Phone " + id + " not founded")
+    public PhoneDto findOne(Long id) {
+        return phoneMapper.convert(
+                phoneRepository.findById(id).orElseThrow(
+                        () -> new EntityNotFoundException("Phone " + id + " not founded")
+                )
         );
     }
 
     @Override
-    public List<Phone> findAll() {
-        return phoneRepository.findAll();
+    public List<PhoneDto> findAll() {
+        return phoneMapper.convertToPhoneDtoList(phoneRepository.findAll());
     }
 
     @Override
-    public Phone save(Phone human) {
-        return phoneRepository.save(human);
+    public PhoneDto save(PhoneDto human) {
+        return phoneMapper.convert(phoneRepository.save(phoneMapper.convert(human)));
     }
 
     @Override

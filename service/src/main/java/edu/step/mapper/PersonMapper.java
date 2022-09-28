@@ -7,12 +7,18 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.List;
+
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface PersonMapper {
 
     Person convert(PersonDto personDto);
 
     PersonDto convert(Person person);
+
+    List<Person> convertToPersonList(List<PersonDto> personDtoList);
+
+    List<PersonDto> convertToPersonDtoList(List<Person> personList);
 
     @AfterMapping
     default void linkAddress(@MappingTarget Person person) {

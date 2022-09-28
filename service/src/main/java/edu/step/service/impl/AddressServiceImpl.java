@@ -1,6 +1,7 @@
 package edu.step.service.impl;
 
-import edu.step.entity.Address;
+import edu.step.dto.AddressDto;
+import edu.step.mapper.AddressMapper;
 import edu.step.repository.AddressRepository;
 import edu.step.service.AddressService;
 import lombok.AllArgsConstructor;
@@ -14,22 +15,25 @@ import java.util.List;
 public class AddressServiceImpl implements AddressService {
 
     private final AddressRepository addressRepository;
+    private final AddressMapper addressMapper;
 
     @Override
-    public Address findOne(Long id) {
-        return addressRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Address " + id + " not founded")
+    public AddressDto findOne(Long id) {
+        return addressMapper.convert(
+                addressRepository.findById(id).orElseThrow(
+                        () -> new EntityNotFoundException("Address " + id + " not founded")
+                )
         );
     }
 
     @Override
-    public List<Address> findAll() {
-        return addressRepository.findAll();
+    public List<AddressDto> findAll() {
+        return addressMapper.convertToAddressDtoList(addressRepository.findAll());
     }
 
     @Override
-    public Address save(Address entity) {
-        return addressRepository.save(entity);
+    public AddressDto save(AddressDto entity) {
+        return addressMapper.convert(addressRepository.save(addressMapper.convert(entity)));
     }
 
     @Override

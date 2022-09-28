@@ -1,6 +1,8 @@
 package edu.step.service.impl;
 
+import edu.step.dto.PersonDto;
 import edu.step.entity.Person;
+import edu.step.mapper.PersonMapper;
 import edu.step.repository.PersonRepository;
 import edu.step.service.PersonService;
 import lombok.AllArgsConstructor;
@@ -14,22 +16,25 @@ import java.util.List;
 public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository repository;
+    private final PersonMapper personMapper;
 
     @Override
-    public Person findOne(Long id) {
-        return repository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Human not found")
+    public PersonDto findOne(Long id) {
+        return personMapper.convert(
+                repository.findById(id).orElseThrow(
+                        () -> new EntityNotFoundException("Human not found")
+                )
         );
     }
 
     @Override
-    public List<Person> findAll() {
-        return repository.findAll();
+    public List<PersonDto> findAll() {
+        return personMapper.convertToPersonDtoList(repository.findAll());
     }
 
     @Override
-    public Person save(Person human) {
-        return repository.save(human);
+    public PersonDto save(PersonDto human) {
+        return personMapper.convert(repository.save(personMapper.convert(human)));
     }
 
     @Override
