@@ -1,10 +1,9 @@
 package edu.step.service.impl;
 
-import edu.step.entity.Human;
-import edu.step.repository.HumanRepository;
-import edu.step.service.HumanService;
+import edu.step.entity.Person;
+import edu.step.repository.PersonRepository;
+import edu.step.service.PersonService;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -12,24 +11,24 @@ import java.util.List;
 
 @AllArgsConstructor
 @Service
-public class HumanServiceImpl implements HumanService {
+public class PersonServiceImpl implements PersonService {
 
-    private final HumanRepository repository;
+    private final PersonRepository repository;
 
     @Override
-    public Human findOne(Long id) {
+    public Person findOne(Long id) {
         return repository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Human not found")
         );
     }
 
     @Override
-    public List<Human> findAll() {
+    public List<Person> findAll() {
         return repository.findAll();
     }
 
     @Override
-    public Human save(Human human) {
+    public Person save(Person human) {
         return repository.save(human);
     }
 

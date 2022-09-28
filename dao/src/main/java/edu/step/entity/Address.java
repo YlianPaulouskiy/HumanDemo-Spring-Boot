@@ -35,6 +35,6 @@ public class Address extends BaseEntity {
 
     @OneToOne
     @JoinColumn(name = "human_id", referencedColumnName = "id")
-    private Human human;
+    private Person human;
 
 }

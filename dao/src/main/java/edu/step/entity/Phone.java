@@ -18,15 +18,15 @@ public class Phone extends BaseEntity {
 
     @Basic
     @Column(name = "operator_code")
-    private String operatorCode;
+    private Integer operatorCode;
 
     @Basic
     @Column(name = "mobile")
-    private String mobile;
+    private Integer mobile;
 
     //------------------------------------------------------------------------------------------------------------------
 
     @ManyToOne
     @JoinColumn(name = "human_id")
-    private Human human;
+    private Person human;
 }

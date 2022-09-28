@@ -1,8 +1,8 @@
 package edu.step.controller.web.impl;
 
 import edu.step.controller.web.IndexController;
-import edu.step.entity.Human;
-import edu.step.service.HumanService;
+import edu.step.entity.Person;
+import edu.step.service.PersonService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,15 +13,15 @@ import java.util.List;
 @RequestMapping("/human")
 public class IndexControllerImpl implements IndexController {
 
-    private final HumanService humanService;
+    private final PersonService personService;
 
-    public IndexControllerImpl(HumanService humanService) {
-        this.humanService = humanService;
+    public IndexControllerImpl(PersonService personService) {
+        this.personService = personService;
     }
 
     @Override
     public String index(ModelMap modelMap) {
-        List<Human> humanList = humanService.findAll();
+        List<Person> humanList = personService.findAll();
         modelMap.addAttribute("humanList", humanList);
         return "index";
     }

@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name = "humans")
 @Getter
 @Setter
-public class Human extends BaseEntity {
+public class Person extends BaseEntity {
 
     @Basic
     @Column(name = "name")
@@ -27,7 +27,7 @@ public class Human extends BaseEntity {
 
     @Basic
     @Column(name = "age")
-    private int age;
+    private Integer age;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
